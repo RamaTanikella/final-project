@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AllRooms from "../components/AllRooms";
 import {getListings} from "../api/index"
+import Banner from "../components/Banner"
 const Home = () => {
 
   const [listings, setListings] = useState([{
@@ -21,14 +22,15 @@ const Home = () => {
   return (
     <>
 
-        {/* <Banner
-        title="luxurious rooms"
-        subtitle="deluxe rooms starting at $299"
-        > */}
+        <Banner
+        title="Prestige Worldwide"
+        subtitle="Where luxury meets affordability"
+        >
         {/* <Link to="/rooms" className="btn-primary">
             our rooms
         </Link> */}
         {/* </Banner> */}
+        </Banner>
         <AllRooms rooms={listings}/>
     </>
   );

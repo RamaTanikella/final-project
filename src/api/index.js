@@ -1,11 +1,11 @@
 
 
 const getListings = async () => {
-    const resp = await fetch("http://localhost:3000/api/listings");
+    const resp = await fetch("http://192.168.1.178:3000/api/listings");
     const listings = await resp.json()
     const newListings = []
     for(let listing of listings){
-        const imagesResp = await fetch('http://localhost:3000/api/images/' + listing.listing_id)
+        const imagesResp = await fetch('http://192.168.1.178:3000/api/images/' + listing.listing_id)
         var images = await imagesResp.json()
         images = images.map((img) => img.image_url)
         newListings.push({

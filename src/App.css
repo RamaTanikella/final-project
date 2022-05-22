@@ -171,7 +171,7 @@ h6 {
 /* End of Hero */
 /* Banner */
 .banner {
-  display: inline-block;
+  /* display: inline-block; */
   background: rgba(0, 0, 0, 0.5);
   color: var(--mainWhite);
   padding: 2rem 1rem;
