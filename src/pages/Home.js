@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AllRooms from "../components/AllRooms";
+import {getListings} from "../api/index"
+const Home = () => {
 
-// import Hero from "../components/Hero";
-// import Banner from "../components/Banner";
-// import Services from "../components/Services";
-// import FeaturedRooms from "../components/FeaturedRooms";
-const home = () => {
+  const [listings, setListings] = useState([{
+    "name": "Default Room 1",
+    "description": "Default Room 1",
+    "price": 102,
+    "id": 1,
+    images: ["https://media.timeout.com/images/105859033/image.jpg"]
+  }])
+
+  const getAllListings = async () => {
+    const allListings = await getListings()
+    setListings(allListings)
+  }
+  useEffect(() => {
+    getAllListings()
+  }, [])
   return (
     <>
 
@@ -17,38 +29,9 @@ const home = () => {
             our rooms
         </Link> */}
         {/* </Banner> */}
-        <AllRooms rooms={[
-            {
-                "id":1,
-                "name": "Room 1",
-                "description": "Room 1 description",
-                "images": ["https://media.timeout.com/images/105859033/image.jpg"],
-                "price": 100
-            },
-            {
-              "id":1,
-              "name": "Room 1",
-              "description": "Room 1 description",
-              "images": ["https://media.timeout.com/images/105859033/image.jpg"],
-              "price": 100
-          },
-          {
-            "id":1,
-            "name": "Room 1",
-            "description": "Room 1 description",
-            "images": ["https://media.timeout.com/images/105859033/image.jpg"],
-            "price": 100
-          },
-          {
-            "id":1,
-            "name": "Room 1",
-            "description": "Room 1 description",
-            "images": ["https://media.timeout.com/images/105859033/image.jpg"],
-            "price": 100
-          }
-        ]}/>
+        <AllRooms rooms={listings}/>
     </>
   );
 };
 
-export default home;
+export default Home;
