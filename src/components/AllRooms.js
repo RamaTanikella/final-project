@@ -1,7 +1,7 @@
 import React, {useEffect, useState } from "react";
 import { addReservation, getReservationsForId } from "../api";
 import Modal from "./Modal";
-import ReservationForm from "./ReservationForm";
+
 // import Title from "./Title";
 // import { RoomContext } from "../context";
 import Room from "./Room";
@@ -17,8 +17,7 @@ const AllRooms = ({rooms}) => {
      
     const [showModal, setModal] = useState(false)   
     const [whichRoom, setWhichRoom] = useState(1) 
-    const [modalRef, setModalRef] = useState() 
-    const [closeRef, setCloseRef] = useState() 
+
     const [blackList, setBlackList] = useState([]) 
 
     // useEffect(() => {
@@ -26,17 +25,16 @@ const AllRooms = ({rooms}) => {
     // }, [])
     const getAllReservationsForRoom = async () => {
         const r = await getReservationsForId(whichRoom)
-        // alert("here")
         setBlackList(r) 
     }
     useEffect(() => {
         getAllReservationsForRoom()
     }, [whichRoom, showModal])
     const onSubmit = async ({name, email, phone, inDate, outDate, listing_id}) => {
-        if(name.trim().length == 0){
+        if(name.trim().length === 0){
             alert("Please add a valid name")
         }
-        else if(email.trim().length == 0){
+        else if(email.trim().length === 0){
             alert("Please add a valid email")
         }
         else if(phone.trim().length < 9){
@@ -65,7 +63,7 @@ const AllRooms = ({rooms}) => {
                 console.log(resp)
                 date.setDate(date.getDate() + 1);
             }
-            if(count_good == count_total){
+            if(count_good === count_total){
                 const url = "https://final-project-rama.herokuapp.com"
                 const sendMessageRequest = await fetch(url + "/sendMessage", {
                     method:"POST",
@@ -79,7 +77,7 @@ const AllRooms = ({rooms}) => {
                     })
                 })
                 const resp = await sendMessageRequest.json()
-                if(resp.status == "Good"){
+                if(resp.status === "Good"){
                     alert("Reservation Created Succesfully. Please check your phone for a confirmation text.");
                     setModal(false)
                 }
@@ -117,8 +115,8 @@ const AllRooms = ({rooms}) => {
                 
                 <Modal
                 onSubmit={onSubmit}
-                modalRef={(n) => setModalRef(n)}
-                buttonRef={(n) => setCloseRef(n)}
+                
+                
                 closeModal={closeModal}
                 onKeyDown={onKeyDown}
                 onClickOutside={onClickOutside}
