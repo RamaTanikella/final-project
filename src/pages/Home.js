@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import AllRooms from "../components/AllRooms";
 import {getListings} from "../api/index"
 import Banner from "../components/Banner"
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+
+import { auth } from "../firebase";
 const Home = () => {
 
   const [listings, setListings] = useState([{
@@ -11,6 +15,17 @@ const Home = () => {
     "id": 1,
     images: ["https://media.timeout.com/images/105859033/image.jpg"]
   }])
+
+  const [user, loading, error] = useAuthState(auth);
+  
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return navigate("/");
+
+  }, [user, loading]);
 
   const getAllListings = async () => {
     const allListings = await getListings()
