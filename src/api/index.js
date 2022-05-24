@@ -52,6 +52,7 @@ const addReservation = async ({name, email, phone, date, listing_id}) => {
         body: JSON.stringify(body)
     })
     const addResponse = await addRequest.json()
+    return addResponse
     // console.log("Add Response")
     // console.log(addResponse)
 

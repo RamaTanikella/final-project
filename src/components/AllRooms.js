@@ -1,6 +1,7 @@
 import React, {useEffect, useState } from "react";
 import { addReservation, getReservationsForId } from "../api";
 import Modal from "./Modal";
+import ReservationForm from "./ReservationForm";
 // import Title from "./Title";
 // import { RoomContext } from "../context";
 import Room from "./Room";
@@ -25,8 +26,8 @@ const AllRooms = ({rooms}) => {
     }
     useEffect(() => {
         getAllReservationsForRoom()
-    }, [whichRoom])
-    const onSubmit = ({name, email, phone, inDate, outDate, listing_id}) => {
+    }, [whichRoom, showModal])
+    const onSubmit = async ({name, email, phone, inDate, outDate, listing_id}) => {
         if(name.trim().length == 0){
             alert("Please add a valid name")
         }
@@ -42,10 +43,28 @@ const AllRooms = ({rooms}) => {
         else{
 
             var date = inDate
+            var count_good = 0
+            var count_total = 0
             while(date < outDate){
-                addReservation({name, email, phone, date, listing_id: whichRoom})
+                count_total += 1
+                const resp = await addReservation({name, email, phone, date, listing_id: whichRoom})
+                if(resp.listing_id){
+                    count_good += 1
+                }
+                
+                else{
+                    alert("Could not create reservation")
+                    break
+                }
+                console.log("Reservation Resp")
+                console.log(resp)
                 date.setDate(date.getDate() + 1);
             }
+            if(count_good == count_total){
+                alert("Reservation Created Succesfully");
+                setModal(false)
+            }
+
         }
 
     }  

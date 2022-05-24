@@ -5,6 +5,7 @@ import {
   auth,
   registerWithEmailAndPassword,
 } from "../firebase";
+import Banner from "../components/Banner"
 
 
 function Register() {
@@ -25,6 +26,12 @@ function Register() {
   }, [user, loading]);
 
   return (
+    <>
+    <Banner
+        title="Prestige Worldwide"
+        subtitle="Where luxury meets affordability"
+        showLogout={false}
+    ></Banner>
     <div className="register">
       <div className="register__container">
         <input
@@ -63,6 +70,7 @@ function Register() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
