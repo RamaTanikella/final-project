@@ -26,7 +26,11 @@ const getListings = async () => {
 const getReservationsForId = async (listing_id) => {
     const resp = await fetch(url  + "/api/reservations/"+ listing_id); 
     var reservations = await resp.json() 
-    reservations=reservations.map((r) => new Date(r.in_date))
+    reservations=reservations.map((r) => {
+        var d = new Date(r.in_date)
+        d.setDate(d.getDate() + 1)
+        return d
+    })
     // alert(reservations)
     return reservations 
 

@@ -48,7 +48,7 @@ const AllRooms = ({rooms}) => {
             var date = inDate
             var count_good = 0
             var count_total = 0
-            while(date < outDate){
+            while(date <= outDate){
                 count_total += 1
                 const resp = await addReservation({name, email, phone, date, listing_id: whichRoom})
                 if(resp.listing_id){
@@ -70,9 +70,7 @@ const AllRooms = ({rooms}) => {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         phone,
-                        message: "Thank you! Your reservation is confirmed for "+ 
-                        (inDate.getMonth()+1) + "/"  + inDate.getDate() + "/" + inDate.getYear() + " to " + 
-                        (outDate.getMonth()+1) + "/"  + outDate.getDate() + "/" + outDate.getYear() 
+                        message: "Thank you, your reservation is confirmed!"
 
                     })
                 })
