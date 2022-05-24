@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from "react";
-import { addReservation } from "../api/index";
+// import { addReservation } from "../api/index";
 import Modal from "./Modal";
 
 // import Title from "./Title";
@@ -12,8 +12,33 @@ export const allRoomsContext = React.createContext();
 // const client = require('twilio')(
     
 // );
+const url = "https://final-project-rama.herokuapp.com"
+const addReservation = async ({name, email, phone, date, listing_id}) => {
+    var month = date.getMonth()+1
+    if( month < 10){
+        month = "0" + month
+    }
+    const body  = {
+        "listing_id": listing_id,
+        "guest_name": name,
+        "email": email,
+        "in_date": date.getFullYear() + "-" + month + "-" + date.getDate()
+    }
+    // console.log("Request Body")
+    // console.log(body)
+    const addRequest = await fetch(url + "/api/reservations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    })
+    const addResponse = await addRequest.json()
+    return addResponse
+    // console.log("Add Response")
+    // console.log(addResponse)
+
+}
 const getReservationsForId = async (listing_id) => {
-    const resp = await fetch("https://final-project-rama.herokuapp.com"  + "/api/reservations/"+ listing_id); 
+    const resp = await fetch(url  + "/api/reservations/"+ listing_id); 
     var reservations = await resp.json() 
     reservations=reservations.map((r) => {
         var d = new Date(r.in_date)
