@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from "react";
-import { addReservation, getReservationsForId } from "../api";
+import { addReservation, getReservationsForId } from "../api/index";
 import Modal from "./Modal";
 
 // import Title from "./Title";
