@@ -683,3 +683,7 @@ h6 {
 .register div {
   margin-top: 7px;
 }
+.banner_logout{
+  background-color: transparent;
+  border-color: transparent;
+}

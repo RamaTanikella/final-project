@@ -16,7 +16,7 @@ const Home = () => {
     images: ["https://media.timeout.com/images/105859033/image.jpg"]
   }])
 
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading ] = useAuthState(auth);
   
   const navigate = useNavigate();
 
