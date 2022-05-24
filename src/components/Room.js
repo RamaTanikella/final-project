@@ -5,7 +5,7 @@ import { memo } from "react";
 import { allRoomsContext } from "./AllRooms";
 
 const Room = memo(({ room }) => {
-    console.log(JSON.stringify(room))
+    // console.log(JSON.stringify(room))
     const { name, description, images, price, id } = room;
     // console.log(name);
     const {showModal, setModal, whichRoom, setWhichRoom} = React.useContext(allRoomsContext); 

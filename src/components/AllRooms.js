@@ -1,5 +1,5 @@
-import React, {useState } from "react";
-import { addReservation } from "../api";
+import React, {useEffect, useState } from "react";
+import { addReservation, getReservationsForId } from "../api";
 import Modal from "./Modal";
 // import Title from "./Title";
 // import { RoomContext } from "../context";
@@ -13,6 +13,19 @@ const AllRooms = ({rooms}) => {
     const [whichRoom, setWhichRoom] = useState(1) 
     const [modalRef, setModalRef] = useState() 
     const [closeRef, setCloseRef] = useState() 
+    const [blackList, setBlackList] = useState([]) 
+
+    // useEffect(() => {
+
+    // }, [])
+    const getAllReservationsForRoom = async () => {
+        const r = await getReservationsForId(whichRoom)
+        // alert("here")
+        setBlackList(r) 
+    }
+    useEffect(() => {
+        getAllReservationsForRoom()
+    }, [whichRoom])
     const onSubmit = ({name, email, phone, inDate, outDate, listing_id}) => {
         if(name.trim().length == 0){
             alert("Please add a valid name")
@@ -46,7 +59,7 @@ const AllRooms = ({rooms}) => {
         setModal(false)
     }  
     return (    
-        <allRoomsContext.Provider value={{showModal, setModal, whichRoom, setWhichRoom}}>
+        <allRoomsContext.Provider value={{showModal, setModal, whichRoom, setWhichRoom, blackList}}>
             <section className="featured-rooms">
                 <div className="featured-rooms-center">
                     {

@@ -1,11 +1,29 @@
 import "react-datepicker/dist/react-datepicker.css"
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDatePicker from 'react-datepicker';
-
+import { allRoomsContext } from "./AllRooms";
 export const ReservationForm = ({ onSubmit }) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const {blackList} = React.useContext(allRoomsContext);
     
+    useEffect(() => {
+        // var d = new Date()
+        // alert(blackList)
+        // for(let dateInBL of blackList){
+        //     // alert(dateInBL)
+        //     if(d == dateInBL){
+        //         d.setDate(d.getDate() + 1)
+        //     }
+        // }
+        // while(blackList.includes(d)){
+        //     alert(d)
+        //     d.setDate(d.getDate() + 1)
+        // }
+        // setStartDate(d)
+        // d.setDate(d.getDate() + 1)
+        // setEndDate(d)
+    }, [blackList])
     return (
         
 
@@ -44,13 +62,13 @@ export const ReservationForm = ({ onSubmit }) => {
             <label htmlFor="inDate">
                 Start Date
             </label>
-            <ReactDatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="form-control"/>
+            <ReactDatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="form-control" excludeDates={blackList}/>
         </div>
         <div className="form-group">
             <label htmlFor="outDate">
                 Out Date
             </label>
-            <ReactDatePicker selected={endDate} onChange={(date) => setEndDate(date)} className="form-control"/>
+            <ReactDatePicker selected={endDate} onChange={(date) => setEndDate(date)} className="form-control" excludeDates={blackList}/>
         </div>
         <div className="form-group">
             <button className="form-control btn btn-primary" type="submit" >
