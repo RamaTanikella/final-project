@@ -32,7 +32,7 @@ const Home = () => {
     setListings(allListings)
   }
   useEffect(() => {
-    getAllListings()
+    getAllListings() 
   }, [])
   return (
     <>
