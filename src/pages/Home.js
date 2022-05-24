@@ -40,6 +40,7 @@ const Home = () => {
         <Banner
         title="Prestige Worldwide"
         subtitle="Where luxury meets affordability"
+        showLogout={true}
         >
         {/* <Link to="/rooms" className="btn-primary">
             our rooms

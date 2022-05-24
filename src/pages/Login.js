@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import Banner from "../components/Banner"
+ 
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -19,18 +20,24 @@ function Login() {
   }, [user, loading]);
 
   return (
+    <>
+        <Banner
+            title="Prestige Worldwide"
+            subtitle="Where luxury meets affordability"
+            showLogout={false}
+        ></Banner>
     <div className="login">
       <div className="login__container">
         <input
           type="text"
-          className="login__textBox"
+          className="form-control"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
         <input
           type="password"
-          className="login__textBox"
+          className="form-control"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
@@ -52,6 +59,7 @@ function Login() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
