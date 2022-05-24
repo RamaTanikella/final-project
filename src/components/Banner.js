@@ -14,7 +14,7 @@ const Banner = (props) => {
         {
             showLogout
             ?
-            <button class="banner_logout" onClick={() => {logout(); navigate("/");}}>Logout</button>
+            <button className="banner_logout" onClick={() => {logout(); navigate("/");}}>Logout</button>
             :
             null
         }

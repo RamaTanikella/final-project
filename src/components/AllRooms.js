@@ -7,6 +7,11 @@ import ReservationForm from "./ReservationForm";
 import Room from "./Room";
 // import Loading from "./Loading";
 export const allRoomsContext = React.createContext();
+
+// const client = twilio.RequestClient()
+// const client = require('twilio')(
+    
+// );
 const AllRooms = ({rooms}) => {
 
      
@@ -61,8 +66,26 @@ const AllRooms = ({rooms}) => {
                 date.setDate(date.getDate() + 1);
             }
             if(count_good == count_total){
-                alert("Reservation Created Succesfully");
-                setModal(false)
+                const url = "https://final-project-rama.herokuapp.com"
+                const sendMessageRequest = await fetch(url + "/sendMessage", {
+                    method:"POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        phone,
+                        message: "Thank you! Your reservation is confirmed for "+ 
+                        (inDate.getMonth()+1) + "/"  + inDate.getDate() + "/" + inDate.getYear() + " to " + 
+                        (outDate.getMonth()+1) + "/"  + outDate.getDate() + "/" + outDate.getYear() 
+
+                    })
+                })
+                const resp = await sendMessageRequest.json()
+                if(resp.status == "Good"){
+                    alert("Reservation Created Succesfully. Please check your phone for a confirmation text.");
+                    setModal(false)
+                }
+                else{
+                    alert("Could not create reservation")
+                }
             }
 
         }

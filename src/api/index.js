@@ -1,6 +1,6 @@
 
-const url = "http://localhost:3000"
-// const url = "https://final-project-rama.herokuapp.com"
+// const url = "http://localhost:3000"
+const url = "https://final-project-rama.herokuapp.com"
 const getListings = async () => {
     const resp = await fetch(url  + "/api/listings");
     const listings = await resp.json()
