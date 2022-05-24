@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from "react";
-import { addReservation, getReservationsForId } from "../api/index";
+import { addReservation } from "../api/index";
 import Modal from "./Modal";
 
 // import Title from "./Title";
@@ -12,6 +12,19 @@ export const allRoomsContext = React.createContext();
 // const client = require('twilio')(
     
 // );
+const getReservationsForId = async (listing_id) => {
+    const resp = await fetch("https://final-project-rama.herokuapp.com"  + "/api/reservations/"+ listing_id); 
+    var reservations = await resp.json() 
+    reservations=reservations.map((r) => {
+        var d = new Date(r.in_date)
+        d.setDate(d.getDate() + 1)
+        return d
+    })
+    // alert(reservations)
+    return reservations 
+
+    
+}
 const AllRooms = ({rooms}) => {
 
      
