@@ -1,5 +1,6 @@
 
-const url = "https://final-project-rama.herokuapp.com"
+const url = "http://localhost:3000"
+// const url = "https://final-project-rama.herokuapp.com"
 const getListings = async () => {
     const resp = await fetch(url  + "/api/listings");
     const listings = await resp.json()
@@ -22,6 +23,31 @@ const getListings = async () => {
     
 }
 
+const addReservation = async ({name, email, phone, date, listing_id}) => {
+    var month = date.getMonth()+1
+    if( month < 10){
+        month = "0" + month
+    }
+    const body  = {
+        "listing_id": listing_id,
+        "guest_name": name,
+        "email": email,
+        "in_date": date.getFullYear() + "-" + month + "-" + date.getDate()
+    }
+    console.log("Request Body")
+    console.log(body)
+    const addRequest = await fetch(url + "/api/reservations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    })
+    const addResponse = await addRequest.json()
+    console.log("Add Response")
+    console.log(addResponse)
+
+}
+
 module.exports = {
-    getListings
+    getListings,
+    addReservation
 }

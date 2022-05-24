@@ -15,9 +15,9 @@ export const ReservationForm = ({ onSubmit }) => {
         onSubmit({
             name: event.target.name.value,
             phone: event.target.phone.value,
-            email: event.target.phone.value,
-            inDate: event.target.phone.value,
-            outDate: event.target.phone.value
+            email: event.target.email.value,
+            inDate: startDate,
+            outDate: endDate,
         })
         }}>
         <p style={{textAlign: "center", fontWeight: "bold"}}>
@@ -36,7 +36,7 @@ export const ReservationForm = ({ onSubmit }) => {
         </div>
         <div className="form-group">
             <label htmlFor="phone">Phone Number</label>
-            <input type="phone" className="form-control" id="phone"
+            <input type="tel" className="form-control" id="phone"
             placeholder="+1234567890" 
             />
         </div>
